@@ -46,3 +46,25 @@ CREATE TABLE Reviews (
     FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE, -- If user is deleted, delete the review.
     FOREIGN KEY (book_id) REFERENCES Books(id) ON DELETE CASCADE -- If Book is deleted, delete review.
 );
+
+-- Add indexes to the tables.
+-- Indexes will speed up the querying process.
+-- Defined indexes for foreign keys, and other columns that would be frequently called upon.
+
+-- Add an index to the username column in the Users table.
+CREATE INDEX idx_username ON Users(username); 
+
+-- Add indexes to the Books table.
+CREATE INDEX idx_genre ON Books(genre);
+CREATE INDEX idx_price ON Books(price);
+CREATE INDEX idx_author ON Books(author);
+
+-- Add indexes to the Orders table.
+CREATE INDEX idx_orders_user_id ON Orders(user_id); -- Foreign Key for Users.
+CREATE INDEX idx_orders_book_id ON Orders(book_id); -- Foreign Key for Books.
+CREATE INDEX idx_status ON Orders(status);
+
+-- Add indexes to the Reviews table.
+CREATE INDEX idx_rating ON Reviews(rating);
+CREATE INDEX idx_reviews_book_id ON Reviews(book_id); -- Foreign Key for Books.
+CREATE INDEX idx_reviews_user_id ON Reviews(user_id); -- Foreign Key for Users.

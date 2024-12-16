@@ -1,16 +1,5 @@
 -- Begin insertions into the book store database.
 
-CREATE TABLE Reviews (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    user_id INT NOT NULL,
-    book_id INT NOT NULL,
-    rating INT NOT NULL CHECK (rating >= 1 AND rating <= 10), -- Rating between 1 - 10.
-    comment TEXT NOT NULL,
-    UNIQUE (user_id, book_id), -- A user can only review the book once.
-    FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE, -- If user is deleted, delete the review.
-    FOREIGN KEY (book_id) REFERENCES Books(id) ON DELETE CASCADE -- If Book is deleted, delete review.
-);
-
 -- Insert users into the Users table.
 INSERT INTO Users (username, password, email, role) VALUES
 ('arizeto', 'thisIsNotASecurePassword', 'arizetocs@gmail.com', 'ADMINISTRATOR'),
@@ -19,7 +8,10 @@ INSERT INTO Users (username, password, email, role) VALUES
 ('maggie-tabby', 'a4jfqwh42we!', 'maggieThePrincess@gmail.com', 'CUSTOMER'),
 ('epicmanpro2', 'shadowslurking123', 'epicmanpro2@gmail.com', 'CUSTOMER'),
 ('bwindz', 'spicytaco925!$great', 'windowsbwindz@protonmail.com', 'CUSTOMER'),
-('sherlock-holmes', 'elementaryMyDear', 'the_real_sherlock@aol.com', 'CUSTOMER');
+('sherlock-holmes', 'elementaryMyDear', 'the_real_sherlock@aol.com', 'CUSTOMER'),
+('Randy_Dows', 'booksarelife', 'randy_dows_1986@yahoo.com', 'CUSTOMER'),
+('Sandy_Rows', 'funny_girl_1990', 'sandy_rows_1990@yahoo.com', 'CUSTOMER'),
+('Makoto Takabe', 'dogsdrool_3493nk#2@$!', 'makoto_reader@gmail.com', 'CUSTOMER');
 
 -- Insert Books into the Books table.
 -- Book information such as 'description', obtained via Amazon.
@@ -31,17 +23,17 @@ INSERT INTO Books (name, author, ISBN, price, genre, description) VALUES
 ('To Kill a Mockingbird', 'Harper Lee', '978-0446310789', 18.99, 'Coming of Age', 'The unforgettable novel of a childhood in a sleepy Southern town and the crisis of conscience that rocked it, To Kill A Mockingbird became both an instant bestseller and a critical success when it was first published in 1960. It went on to win the Pulitzer Prize in 1961 and was later made into an Academy Award-winning film, also a classic.');
 
 -- Insert Orders into the Orders table.
-INSERT INTO Orders (user_id, book_id, quantity, status) VALUES
-(1, 3, 2, 'PENDING'), -- arizeto orders Twilight, 2 copies, status = PENDING
-(2, 1, 1, 'DELIVERED'), -- milkyway_the_cat orders Harry Potter and the Sorcerer''s Stone, 1 copy, status = DELIVERED
-(2, 2, 1, 'SHIPPED'), -- milkyway_the_cat orders The Fellowship of the Ring, 1 copy, status = SHIPPED
-(3, 4, 1, 'PENDING'), -- jingo-jeans orders Lessons in Chemistry, 1 copy, status = PENDING
-(4, 5, 1, 'DELIVERED'), -- maggie-tabby orders To Kill a Mockingbird, 1 copy, status = DELIVERED
-(5, 1, 1, 'DELIVERED'), -- epicmanpro2 orders Harry Potter and the Sorcerer''s Stone, 1 copy, status = DELIVERED
-(6, 3, 1, 'PENDING'), -- bwindz orders Twilight, 1 copy, status = PENDING
-(7, 2, 1, 'SHIPPED'), -- sherlock-holmes orders The Fellowship of the Ring, 1 copy, status = SHIPPED
-(3, 3, 1, 'SHIPPED'), -- jingo-jeans orders Twilight, 1 copy, status = SHIPPED
-(4, 1, 1, 'DELIVERED'); -- maggie-tabby orders Harry Potter and the Sorcerer''s Stone, 1 copy, status = DELIVERED
+INSERT INTO Orders (user_id, book_id, order_date, quantity, status) VALUES
+(1, 3, '2024-12-14 10:00:00', 2, 'PENDING'), -- arizeto orders Twilight, 2 copies, status = PENDING
+(2, 1, '2024-01-21 08:24:00', 1, 'DELIVERED'), -- milkyway_the_cat orders Harry Potter and the Sorcerer''s Stone, 1 copy, status = DELIVERED
+(2, 2, '2023-12-15 07:00:00', 2, 'SHIPPED'), -- milkyway_the_cat orders The Fellowship of the Ring, 2 copies, status = SHIPPED
+(3, 4, '2024-12-14 14:55:00', 4, 'PENDING'), -- jingo-jeans orders Lessons in Chemistry, 4 copies, status = PENDING
+(4, 5, '2024-01-01 10:39:00', 1, 'DELIVERED'), -- maggie-tabby orders To Kill a Mockingbird, 1 copy, status = DELIVERED
+(5, 1, '2024-01-03 15:30:00', 3, 'DELIVERED'), -- epicmanpro2 orders Harry Potter and the Sorcerer''s Stone, 3 copies, status = DELIVERED
+(6, 3, '2022-11-30 17:43:00', 1, 'PENDING'), -- bwindz orders Twilight, 1 copy, status = PENDING
+(7, 2, '2024-03-20 12:23:00', 3, 'SHIPPED'), -- sherlock-holmes orders The Fellowship of the Ring, 3 copies, status = SHIPPED
+(3, 3, '2024-06-14 09:34:00', 1, 'SHIPPED'), -- jingo-jeans orders Twilight, 1 copy, status = SHIPPED
+(4, 1, '2021-08-04 16:52:00', 1, 'DELIVERED'); -- maggie-tabby orders Harry Potter and the Sorcerer''s Stone, 1 copy, status = DELIVERED
 
 -- Insert Reviews into the Reviews table.
 INSERT INTO Reviews (user_id, book_id, rating, comment) VALUES
