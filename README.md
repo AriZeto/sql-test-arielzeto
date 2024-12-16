@@ -23,7 +23,7 @@ If you look upon the `schema.sql` file, you'll notice that constraints and uniqe
 
 # Database Schema:
 
-![Database Schema](https://file%2B.vscode-resource.vscode-cdn.net/Users/arizeto/sql-test-arielzeto/Database%20Schema%20Ariel%20Zeto.png?version%3D1734327177575)
+![Database Schema](Database_Schema_Ariel_Zeto.png)
 
 # Relationships:
 
